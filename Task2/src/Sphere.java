@@ -1,4 +1,4 @@
-public class Sphere implements Volume{
+public class Sphere extends Volume{
     double radius;
 
     public double getRadius() {
@@ -17,8 +17,4 @@ public class Sphere implements Volume{
         return 0.75*3.14*radius;
     }
 
-    @Override
-    public void print() {
-        System.out.println("Это шар с объемом " + caclVolume());
-    }
 }

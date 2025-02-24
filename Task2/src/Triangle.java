@@ -1,6 +1,6 @@
 
 
-public class Triangle implements Figure {
+public class Triangle extends Figure {
     private double side, height;
 
     public double getSide() {
@@ -29,8 +29,5 @@ public class Triangle implements Figure {
         return 0.5 * side * height;
     }
 
-    @Override
-    public void print() {
-        System.out.println("Это фигура - треугольник с площадью " + calcArea());
-    }
+
 }

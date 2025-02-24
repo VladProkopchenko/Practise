@@ -1,4 +1,4 @@
-public class Cube implements Volume{
+public class Cube extends Volume{
     private double side;
 
     public double getSide() {
@@ -19,8 +19,4 @@ public class Cube implements Volume{
         return side * side*side;
     }
 
-    @Override
-    public void print() {
-        System.out.println("Это куб с объемом "+ caclVolume());
-    }
 }

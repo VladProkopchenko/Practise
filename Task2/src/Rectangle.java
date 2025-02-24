@@ -1,6 +1,6 @@
 
 
-public class Rectangle implements Figure {
+public class Rectangle extends Figure {
 
     private double side1, side2;
 
@@ -30,8 +30,4 @@ public class Rectangle implements Figure {
         return side1 * side2;
     }
 
-    @Override
-    public void print() {
-        System.out.println("Это фигура - прямоугольник с площадью " + calcArea());
-    }
 }

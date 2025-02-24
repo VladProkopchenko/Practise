@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Circle implements Figure {
+public class Circle extends Figure {
     private double radius;
 
     public double getRadius() {
@@ -20,8 +20,4 @@ public class Circle implements Figure {
         return 3.14 * radius * radius;
     }
 
-    @Override
-    public void print() {
-        System.out.println("Это фигура - круг с площадью " + calcArea());
-    }
 }
