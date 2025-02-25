@@ -1,15 +1,20 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+ * @author Влад Прокопченко
+ * @version 1.0
+ */
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        DoubleArithmetic doubleArithmetic = new DoubleArithmetic();
+        System.out.println(doubleArithmetic.multiply(6.7, 4.3));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        StringArithmetic stringArithmetic = new StringArithmetic();
+        System.out.println(stringArithmetic.divide("qwerty?", "rt"));
+
+        IntegerArithmetic integerArithmetic = new IntegerArithmetic();
+        System.out.println(integerArithmetic.substract(20, 3));
+
+        VectorArithmetic vectorArithmetic = new VectorArithmetic();
+        System.out.println(vectorArithmetic.add(new Vector(2, 3), new Vector(4, 5)));
+
     }
 }

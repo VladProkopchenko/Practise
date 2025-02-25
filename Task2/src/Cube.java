@@ -15,7 +15,6 @@ public class Cube extends Volume implements Printable{
         this.side = side;
     }
 
-
     @Override
     public BigDecimal calcVolume() {
         return side.pow(3);
