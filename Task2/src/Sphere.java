@@ -1,20 +1,28 @@
-public class Sphere extends Volume{
-    double radius;
+import jdk.jfr.Percentage;
 
-    public double getRadius() {
+import java.math.BigDecimal;
+
+public class Sphere extends Volume implements Printable {
+    BigDecimal radius;
+
+    public BigDecimal getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius) {
+    public void setRadius(BigDecimal radius) {
         this.radius = radius;
     }
-    public Sphere(double radius) {
+    public Sphere(BigDecimal radius) {
         this.radius = radius;
     }
 
     @Override
-    public double caclVolume() {
-        return 0.75*3.14*radius;
+    public BigDecimal calcVolume() {
+        return radius.multiply(BigDecimal.valueOf(0.75*3.14));
     }
 
+    @Override
+    public void print() {
+        System.out.println("Это тело с объемом " + calcVolume());
+    }
 }

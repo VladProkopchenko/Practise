@@ -1,22 +1,29 @@
-public class Cube extends Volume{
-    private double side;
+import java.math.BigDecimal;
 
-    public double getSide() {
+public class Cube extends Volume implements Printable{
+    private BigDecimal side;
+
+    public BigDecimal getSide() {
         return side;
     }
 
-    public void setSide(double side) {
+    public void setSide(BigDecimal side) {
         this.side = side;
     }
 
-    public Cube(double side) {
+    public Cube(BigDecimal side) {
         this.side = side;
     }
 
 
     @Override
-    public double caclVolume() {
-        return side * side*side;
+    public BigDecimal calcVolume() {
+        return side.pow(3);
     }
+
+    @Override
+    public void print(){
+        System.out.println("Это тело с объемом " + calcVolume());
+    };
 
 }

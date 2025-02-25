@@ -1,33 +1,37 @@
+import java.math.BigDecimal;
 
+public class Triangle extends Figure implements Printable{
+    private BigDecimal side, height;
 
-public class Triangle extends Figure {
-    private double side, height;
-
-    public double getSide() {
+    public BigDecimal getSide() {
         return side;
     }
 
-    public void setSide(double side) {
+    public void setSide(BigDecimal side) {
         this.side = side;
     }
 
-    public double getHeight() {
+    public BigDecimal getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(BigDecimal height) {
         this.height = height;
     }
 
-    public Triangle(double side, double height) {
+    public Triangle(BigDecimal side, BigDecimal height) {
         this.side = side;
         this.height = height;
     }
 
     @Override
-    public double calcArea() {
-        return 0.5 * side * height;
+    public BigDecimal calcArea() {
+        return side.multiply(height).multiply(BigDecimal.valueOf(0.5));
     }
 
 
+    @Override
+    public void print() {
+        System.out.println("Это фигура с площадью " + calcArea());
+    }
 }
