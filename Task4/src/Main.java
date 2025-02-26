@@ -3,8 +3,12 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
+
+        // 1 Задание
         System.out.println("Задание 1");
-        Set<String> set = new HashSet<String>();
+
+        // Создал множество строк
+        Set<String> set = new HashSet<>();
         set.add("a");
         set.add("b");
         set.add("c");
@@ -12,16 +16,21 @@ public class Main {
         set.add("e");
 
         System.out.println("Множество из 5 элементов");
+        // Вывел множество на экран с помощью цикла for each
         for (String s : set) {
             System.out.println(s);
         }
+        // Добавил элемент, который уже есть
         set.add("a");
         System.out.println("Добавил дублирующий элемент\nВывод с помощью итератора");
+
+        // Вывел на экран множество с помощью итератора, но дублирующей троки нет
         Iterator<String> iterator = set.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
 
+        // Создал несколько объектов своего класса и добавил во множество
         ExObject exObject1 = new ExObject(1,"one");
         ExObject exObject2 = new ExObject(2,"two");
         ExObject exObject3 = new ExObject(3,"three");
@@ -31,13 +40,15 @@ public class Main {
 
         System.out.println("Множество из объектов");
 
-        Set<ExObject> exObjectSet  = new HashSet<ExObject>();
+        Set<ExObject> exObjectSet  = new HashSet<>();
         exObjectSet.add(exObject1);
         exObjectSet.add(exObject2);
         exObjectSet.add(exObject3);
         exObjectSet.add(exObject4);
         exObjectSet.add(exObject5);
 
+        // Вывел тоже с помощью for each, добавил дублирующий оьъект, но при
+        // повтооном выводе все не повторялись
         for (ExObject exObject : exObjectSet) {
             System.out.println(exObject);
         }
@@ -48,9 +59,11 @@ public class Main {
             System.out.println(exObject);
         }
 
+        // 2 задание
         System.out.println("Задание 2");
 
-        List<ExObject> exObjectList = new ArrayList<ExObject>();
+        // Создал список из тех же объектов и вывел на экран
+        List<ExObject> exObjectList = new ArrayList<>();
         exObjectList.add(exObject1);
         exObjectList.add(exObject2);
         exObjectList.add(exObject3);
@@ -62,6 +75,8 @@ public class Main {
             System.out.println(exObject);
         }
 
+        // Попытался добавить новый элемент в список, когда цикл был на 3
+        // но он добавился в самый конец
         System.out.println("Список с добавлением объекта");
         for(int i =0; i< exObjectList.size(); i++){
             if(i==2){
@@ -70,6 +85,10 @@ public class Main {
             System.out.println(exObjectList.get(i));
         }
 
+        // потом попробовал удалить 2 элемент, находясь на 5 позиции
+        // во время вывода 2 все еще оставался, а 5 удалился
+        // но во время вывода после цикла все нормально
+        // как я понял в первый раз просто индексы сместились (i)
         System.out.println("Список с удалением объекта");
         for(int i =0; i< exObjectList.size(); i++){
             if(i==4){
@@ -79,10 +98,14 @@ public class Main {
         }
         System.out.println(exObjectList);
 
+
+        // 3 задание
         System.out.println("Задание 3");
 
+
+        // заполнил и вывел содержимое хэш таблицы
         System.out.println("Вывод hashmap");
-        Map<String,Integer> map = new HashMap<String,Integer>();
+        Map<String,Integer> map = new HashMap<>();
         map.put("one",1);
         map.put("two",2);
         map.put("three",3);
@@ -91,6 +114,9 @@ public class Main {
         for(String s : map.keySet()){
             System.out.println(s + " " + map.get(s));
         }
+
+        // добавил пару с ключом, который уже есть
+        // и пара заменилась
         System.out.println("Добавление элемента и одинаковым ключом");
         map.put("four",0);
 
@@ -98,10 +124,13 @@ public class Main {
             System.out.println(s + " " + map.get(s));
         }
 
+
+        // 4 задание
         System.out.println("Задание 4");
 
         System.out.println("Сортированное множество из строк");
-
+        // нужно было создать сортированное множество
+        // использовал TreeSet
         Set<String> stringSet = new TreeSet<>();
         stringSet.add("z");
         stringSet.add("b");
@@ -112,6 +141,10 @@ public class Main {
 
         System.out.println(stringSet);
 
+
+        // создалось еще одно множество из объектов
+        // они отсортировались, потому что я добавил компаратор,
+        // который сравнивал по полю num
         System.out.println("Сортированное множество из объектов");
         Set<ExObject> objectSet = new TreeSet<>();
         objectSet.add(new ExObject(5,"five"));
@@ -122,6 +155,8 @@ public class Main {
 
         System.out.println(objectSet);
 
+        // 5 задание
+        // сделал тоже самое для хэш талицы
         System.out.println("Задание 5");
 
         System.out.println("Отсортированная hashmap ключей строк");
