@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Arithmetic"},{"p":"<Unnamed>","l":"DoubleArithmetic"},{"p":"<Unnamed>","l":"IntegerArithmetic"},{"p":"<Unnamed>","l":"Main"},{"p":"<Unnamed>","l":"StringArithmetic"},{"p":"<Unnamed>","l":"Vector"},{"p":"<Unnamed>","l":"VectorArithmetic"}];updateSearchResults();
