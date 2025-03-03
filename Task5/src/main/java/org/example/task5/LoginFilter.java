@@ -13,7 +13,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = ((HttpServletRequest) servletRequest).getSession();
-        boolean loggedIn = (session != null && session.getAttribute("user") != null);
+        boolean loggedIn = (session != null && session.getAttribute("isLogin") == Boolean.TRUE );
         if (loggedIn) {
             filterChain.doFilter(servletRequest, servletResponse);
         }

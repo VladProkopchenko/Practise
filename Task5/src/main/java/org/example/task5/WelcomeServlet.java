@@ -12,20 +12,16 @@ import java.io.IOException;
 public class WelcomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
-//        if(session.getAttribute("user") == null) {
-//            res.sendRedirect(req.getContextPath() + "/login.jhtml");
-//        }
-//        else{
+
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp");
             rd.forward(req,res);
-        //}
 
     }
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action.equals("logout")) {
             HttpSession session = req.getSession();
-            session.setAttribute("isLoggedIn", "false");
+            session.setAttribute("isLogin", "false");
             res.sendRedirect(req.getContextPath() + "/login.jhtml");
         }
         if (action.equals("edit")) {
