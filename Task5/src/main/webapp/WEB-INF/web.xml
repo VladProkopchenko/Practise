@@ -27,4 +27,13 @@
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome.jhtml</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginEditServlet</servlet-name>
+        <servlet-class>org.example.task5.LoginEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginEditServlet</servlet-name>
+        <url-pattern>/loginedit.jhtml</url-pattern>
+    </servlet-mapping>
+
 </web-app>

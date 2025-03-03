@@ -18,10 +18,19 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        HttpSession session = request.getSession();
 
-        if ("admin".equals(username) && "admin123".equals(password)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", username);
+        User user = new User("admin","admin123");
+        if(session.getAttribute("user")!=null){
+            User oldUser = (User)session.getAttribute("user");
+            user.setName(oldUser.getName());
+            user.setPassword(oldUser.getPassword());
+        }
+
+        if (user.getName().equals(username) && user.getPassword().equals(password)) {
+
+            session.setAttribute("user", user);
+            session.setAttribute("isLogin", true);
             response.sendRedirect(request.getContextPath() + "/welcome.jhtml");
         } else {
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
