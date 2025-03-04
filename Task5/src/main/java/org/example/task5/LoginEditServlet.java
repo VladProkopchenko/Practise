@@ -22,7 +22,6 @@ public class LoginEditServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         if (oldPassword.equals(user.getPassword())) {
             user.setPassword(newPassword);
-            session.removeAttribute("user");
             session.setAttribute("user", user);
             response.sendRedirect(request.getContextPath() + "/login.jhtml");
         }
