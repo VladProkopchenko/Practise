@@ -35,4 +35,30 @@
         <servlet-name>AddServlet</servlet-name>
         <url-pattern>/new-user</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditServlet</servlet-name>
+        <servlet-class>org.example.task6.servlets.EditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditServlet</servlet-name>
+        <url-pattern>/edit-user</url-pattern>
+    </servlet-mapping>
+
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>org.example.task6.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>MenuServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>EditServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>AddServlet</servlet-name>
+    </filter-mapping>
 </web-app>
