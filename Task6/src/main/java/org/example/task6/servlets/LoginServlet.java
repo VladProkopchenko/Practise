@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         if(UserTool.checkPassword(users,login,password)){
-            session.setAttribute("user",UserTool.getCheckedUser(users,login));
+            session.setAttribute("user",UserTool.getUserByLogin(users,login));
             session.setAttribute("isLoggedIn",true);
             response.sendRedirect(request.getContextPath()+"/menu");
         }

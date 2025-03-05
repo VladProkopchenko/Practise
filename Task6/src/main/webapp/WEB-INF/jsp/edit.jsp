@@ -1,31 +1,21 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 04.03.2025
-  Time: 11:32
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h1>EDIT</h1>
 <form action="${pageContext.request.contextPath}/new-user" method="post">
-    <p>Новый пользователь</p>
+    <p>Редактировать пользователя</p>
     <label for="name">Имя:</label>
-    <input type="text" id="name" name="name" required><br>
+    <input type="text" id="name" name="name" value="${sessionScope.userForEdit.name}" required><br>
     <label for="surname">Фамилия:</label>
-    <input type="text" id="surname" name="surname" required><br>
+    <input type="text" id="surname" name="surname"  value="${sessionScope.userForEdit.surname}" required><br>
     <label for="patronymic">Отчество:</label>
-    <input type="text" id="patronymic" name="patronymic" required><br>
+    <input type="text" id="patronymic" name="patronymic" value="${sessionScope.userForEdit.patronymic}" required><br>
     <label for="email">Почта:</label>
-    <input type="text" id="email" name="email" required><br>
+    <input type="text" id="email" name="email" value="${sessionScope.userForEdit.email}" required><br>
     <label for="login">Логин:</label>
-    <input type="text" id="login" name="login" required><br>
-    <label for="password">Пароль:</label>
-    <input type="password" id="password" name="password" required><br>
+    <input type="text" id="login" name="login" value="${sessionScope.userForEdit.login}" required><br>
     <label for="role">Роль:</label>
     <select id="role" name="role" required>
         <option value="user">Пользователь</option>
@@ -33,7 +23,7 @@
     </select><br>
     <label for="birthday">Дата рождения:</label>
     <input type="date" id="birthday" name="birthday" required><br>
-    <button type="submit">Сохранить</button>
+    <button type="submit" name="action" value="save">Сохранить изменения</button>
 </form>
 </body>
 </html>

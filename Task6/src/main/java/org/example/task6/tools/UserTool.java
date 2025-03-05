@@ -15,9 +15,17 @@ public class UserTool {
         }
         return result;
     }
-    public static User getCheckedUser(List<User> users, String login) {
+    public static User getUserByLogin(List<User> users, String login) {
         for (User user : users) {
             if (user.getLogin().equals(login)) {
+                return user;
+            }
+        }
+        return null;
+    }
+    public static  User getUserById(List<User> users, int id) {
+        for (User user : users) {
+            if(user.getId()==id){
                 return user;
             }
         }

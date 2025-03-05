@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.task6.model.User;
+import org.example.task6.tools.UserTool;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,8 +29,12 @@ public class MenuServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/new-user");
         }
         if(action.equals("editUser")) {
+            HttpSession session = request.getSession();
+            List<User> users = (List<User>) session.getAttribute("users");
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            User user = UserTool.getUserById(users,userId);
+            session.setAttribute("userForEdit",user);
             response.sendRedirect(request.getContextPath() + "/edit-user");
-            System.out.println(request.getParameter("userId"));
         }
         if(action.equals("deleteUser")) {
             int userId = Integer.parseInt(request.getParameter("userId"));
@@ -41,6 +46,7 @@ public class MenuServlet extends HttpServlet {
                 }
             }
             session.setAttribute("users", users);
+            response.sendRedirect(request.getContextPath() + "/menu");
         }
     }
 }
