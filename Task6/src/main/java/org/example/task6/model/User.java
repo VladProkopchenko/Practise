@@ -3,6 +3,7 @@ package org.example.task6.model;
 import java.util.Date;
 
 public class User {
+    private int id;
     private String name;
     private String surname;
     private String patronymic;
@@ -12,7 +13,8 @@ public class User {
     private String role;
     private Date birthday;
 
-    public User(String name, String surname, String patronymic, String email, String login, String password, String role, Date birthday) {
+    public User(int id, String name, String surname, String patronymic, String email, String login, String password, String role, Date birthday) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -21,6 +23,14 @@ public class User {
         this.password = password;
         this.role = role;
         this.birthday = birthday;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -37,12 +37,13 @@ public class AddServlet extends HttpServlet {
             System.out.println("Error date");
         }
 
-        User user = new User(name,surname,patronymic,email,login,password,role,birthday);
+
         HttpSession session = request.getSession();
         List<User> users = (List<User>) session.getAttribute("users");
+        User user = new User(users.size()+1, name, surname, patronymic, email, login, password, role, birthday);
         users.add(user);
         session.setAttribute("users", users);
 
-        response.sendRedirect(request.getContextPath()+"/menu");
+        response.sendRedirect(request.getContextPath() + "/menu");
     }
 }

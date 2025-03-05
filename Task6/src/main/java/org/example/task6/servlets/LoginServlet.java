@@ -31,14 +31,21 @@ public class LoginServlet extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
-        User admin = new User("user-admin", "qqq", "qqqqq", "com",
-                "admin", "admin123", "admin", new Date(1999, Calendar.AUGUST, 15));
-        User user = new User("user-user", "qqqq", "qqqq", "com",
-                "user", "user123", "user", new Date(1999, Calendar.JUNE, 15));
+
         List<User> users = new ArrayList<>();
-        users.add(admin);
-        users.add(user);
-        session.setAttribute("users", users);
+
+        if(session.getAttribute("users") == null) {
+            User admin = new User(1,"user-admin", "qqq", "qqqqq", "com",
+                    "admin", "admin123", "admin", new Date(1999, Calendar.AUGUST, 15));
+            User user = new User(2,"user-user", "qqqq", "qqqq", "com",
+                    "user", "user123", "user", new Date(1999, Calendar.JUNE, 15));
+            users.add(admin);
+            users.add(user);
+            session.setAttribute("users", users);
+        }
+        else{
+            users = (List<User>) session.getAttribute("users");
+        }
 
         if(UserTool.checkPassword(users,login,password)){
             session.setAttribute("user",UserTool.getCheckedUser(users,login));
