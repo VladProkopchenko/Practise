@@ -2,28 +2,49 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        <%@include file="/WEB-INF/css/styles.css"%>
+    </style>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/new-user" method="post">
-    <p>Редактировать пользователя</p>
-    <label for="name">Имя:</label>
-    <input type="text" id="name" name="name" value="${sessionScope.userForEdit.name}" required><br>
-    <label for="surname">Фамилия:</label>
-    <input type="text" id="surname" name="surname"  value="${sessionScope.userForEdit.surname}" required><br>
-    <label for="patronymic">Отчество:</label>
-    <input type="text" id="patronymic" name="patronymic" value="${sessionScope.userForEdit.patronymic}" required><br>
-    <label for="email">Почта:</label>
-    <input type="text" id="email" name="email" value="${sessionScope.userForEdit.email}" required><br>
-    <label for="login">Логин:</label>
-    <input type="text" id="login" name="login" value="${sessionScope.userForEdit.login}" required><br>
-    <label for="role">Роль:</label>
-    <select id="role" name="role" required>
-        <option value="user">Пользователь</option>
-        <option value="admin">Админ</option>
-    </select><br>
-    <label for="birthday">Дата рождения:</label>
-    <input type="date" id="birthday" name="birthday" required><br>
-    <button type="submit" name="action" value="save">Сохранить изменения</button>
-</form>
+<div class="center-content">
+    <form action="${pageContext.request.contextPath}/edit-user" method="post">
+        <h1>Редактировать пользователя</h1>
+        <div class="form-group">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" value="${sessionScope.userForEdit.name}">
+        </div>
+        <div class="form-group">
+            <label for="surname">Фамилия:</label>
+            <input type="text" id="surname" name="surname" value="${sessionScope.userForEdit.surname}">
+        </div>
+        <div class="form-group">
+            <label for="patronymic">Отчество:</label>
+            <input type="text" id="patronymic" name="patronymic" value="${sessionScope.userForEdit.patronymic}">
+        </div>
+        <div class="form-group">
+            <label for="email">Почта:</label>
+            <input type="text" id="email" name="email" value="${sessionScope.userForEdit.email}">
+        </div>
+        <div class="form-group">
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login" value="${sessionScope.userForEdit.login}">
+        </div>
+        <div class="form-group">
+            <label for="role">Роль:</label>
+            <select id="role" name="role" required>
+                <option value="user" >Пользователь</option>
+                <option value="admin">Админ</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="birthday">Дата рождения:</label>
+            <input type="date" id="birthday" name="birthday">
+        </div>
+        <button type="submit" name="action" value="save">Сохранить изменения</button>
+        <button type="submit" name="action" value="cansel">Отменить изменения</button>
+    </form>
+</div>
+
 </body>
 </html>
