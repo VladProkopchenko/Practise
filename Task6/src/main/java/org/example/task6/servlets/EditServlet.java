@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.task6.model.User;
+import org.example.task6.tools.Validator;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -22,9 +23,9 @@ public class EditServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        if (action.equals("save")) {
+        String action = request.getParameter("action");
+        if(action.equals("save")) {
             String name = request.getParameter("name");
             String surname = request.getParameter("surname");
             String patronymic = request.getParameter("patronymic");
@@ -40,24 +41,34 @@ public class EditServlet extends HttpServlet {
             } catch (ParseException e) {
                 System.out.println("Error date");
             }
-            User modifiedUser = (User) session.getAttribute("userForEdit");
-            modifiedUser.setName(name);
-            modifiedUser.setSurname(surname);
-            modifiedUser.setPatronymic(patronymic);
-            modifiedUser.setEmail(email);
-            modifiedUser.setLogin(login);
-            modifiedUser.setPassword(password);
-            modifiedUser.setRole(role);
-            modifiedUser.setBirthday(birthday);
+            if (Validator.isNotEmpty(name) && Validator.isNotEmpty(surname) && Validator.isNotEmpty(patronymic)
+                    && Validator.isNotEmpty(email) && Validator.isNotEmpty(login)
+                    && Validator.isNotEmpty(role) && Validator.isNotEmpty(birthdayStr)) {
+                User modifiedUser = (User) session.getAttribute("userForEdit");
+                modifiedUser.setName(name);
+                modifiedUser.setSurname(surname);
+                modifiedUser.setPatronymic(patronymic);
+                modifiedUser.setEmail(email);
+                modifiedUser.setLogin(login);
+                modifiedUser.setRole(role);
+                modifiedUser.setBirthday(birthday);
 
-            List<User> users = (List<User>) session.getAttribute("users");
-            for (User user : users) {
-                if(user.getId() == modifiedUser.getId()) {
-                    user = modifiedUser;
+                List<User> users = (List<User>) session.getAttribute("users");
+                for (User user : users) {
+                    if (user.getId() == modifiedUser.getId()) {
+                        user = modifiedUser;
+                    }
                 }
+                session.setAttribute("users", users);
+                response.sendRedirect(request.getContextPath() + "/menu");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/edit-user");
             }
-            session.setAttribute("users",users);
-            response.sendRedirect(request.getContextPath()+"/menu");
         }
+        if(action.equals("cansel")){
+            response.sendRedirect(request.getContextPath() + "/menu");
+        }
+
     }
 }
+

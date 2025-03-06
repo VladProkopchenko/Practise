@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.task6.model.User;
+import org.example.task6.tools.Validator;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -38,12 +39,19 @@ public class AddServlet extends HttpServlet {
         }
 
 
-        HttpSession session = request.getSession();
-        List<User> users = (List<User>) session.getAttribute("users");
-        User user = new User(users.size()+1, name, surname, patronymic, email, login, password, role, birthday);
-        users.add(user);
-        session.setAttribute("users", users);
+        if(Validator.isNotEmpty(name) && Validator.isNotEmpty(surname) && Validator.isNotEmpty(patronymic)
+        && Validator.isNotEmpty(email) && Validator.isNotEmpty(login) && Validator.isNotEmpty(password)
+            && Validator.isNotEmpty(role) && Validator.isNotEmpty(birthdayStr)){
+            HttpSession session = request.getSession();
+            List<User> users = (List<User>) session.getAttribute("users");
+            User user = new User(users.size()+1, name, surname, patronymic, email, login, password, role, birthday);
+            users.add(user);
+            session.setAttribute("users", users);
 
-        response.sendRedirect(request.getContextPath() + "/menu");
+            response.sendRedirect(request.getContextPath() + "/menu");
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "/new-user");
+        }
     }
 }

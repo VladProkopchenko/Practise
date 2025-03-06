@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.task6.model.User;
 import org.example.task6.tools.UserTool;
+import org.example.task6.tools.Validator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,9 +28,10 @@ public class LoginServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+
         HttpSession session = request.getSession();
 
         List<User> users = new ArrayList<>();
@@ -47,15 +49,18 @@ public class LoginServlet extends HttpServlet {
             users = (List<User>) session.getAttribute("users");
         }
 
-        if(UserTool.checkPassword(users,login,password)){
-            session.setAttribute("user",UserTool.getUserByLogin(users,login));
-            session.setAttribute("isLoggedIn",true);
-            response.sendRedirect(request.getContextPath()+"/menu");
+        if (Validator.isNotEmpty(login) && Validator.isNotEmpty(password)) {
+            if (UserTool.checkPassword(users, login, password)) {
+                session.setAttribute("user", UserTool.getUserByLogin(users, login));
+                session.setAttribute("isLoggedIn", true);
+                response.sendRedirect(request.getContextPath() + "/menu");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
+        } else {
+            response.sendRedirect(request.getContextPath() + "/login");
         }
-        else{
-            session.setAttribute("isLoggedIn",false);
-            response.sendRedirect(request.getContextPath()+"/login");
-        }
+
 
     }
 }

@@ -3,6 +3,7 @@ package org.example.task6.tools;
 import org.example.task6.model.User;
 
 import java.util.List;
+import java.util.Objects;
 
 public class UserTool {
     public static boolean checkPassword(List<User> users,String login, String password) {
@@ -17,7 +18,7 @@ public class UserTool {
     }
     public static User getUserByLogin(List<User> users, String login) {
         for (User user : users) {
-            if (user.getLogin().equals(login)) {
+            if (Objects.equals(user.getLogin(), login)) {
                 return user;
             }
         }
