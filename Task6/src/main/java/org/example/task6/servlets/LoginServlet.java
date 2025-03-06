@@ -19,7 +19,7 @@ import java.util.List;
 
 public class LoginServlet extends HttpServlet {
     @Override
-    public void init(ServletConfig config)  {
+    public void init(ServletConfig config) {
 
     }
 
@@ -36,16 +36,15 @@ public class LoginServlet extends HttpServlet {
 
         List<User> users = new ArrayList<>();
 
-        if(session.getAttribute("users") == null) {
-            User admin = new User(1,"Администратор", "ххх", "ххх", "admin@mail.ru",
-                    "admin", "admin123", "admin", new Date(1999, Calendar.AUGUST, 15));
-            User user = new User(2,"Пользователь", "ххх", "ххх", "user@gmail.com",
-                    "user", "user123", "user", new Date(1999, Calendar.JUNE, 15));
+        if (session.getAttribute("users") == null) {
+            User admin = new User(1, "Вася", "ххх", "ххх", "admin@mail.ru",
+                    "admin", "admin123", "admin", new Date(100, Calendar.AUGUST, 34));
+            User user = new User(2, "Петя", "ххх", "ххх", "user@gmail.com",
+                    "user", "user123", "user", new Date(100, Calendar.JUNE, 15));
             users.add(admin);
             users.add(user);
             session.setAttribute("users", users);
-        }
-        else{
+        } else {
             users = (List<User>) session.getAttribute("users");
         }
 
@@ -60,7 +59,6 @@ public class LoginServlet extends HttpServlet {
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
         }
-
 
     }
 }

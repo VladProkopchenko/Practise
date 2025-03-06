@@ -46,7 +46,7 @@
             <label for="role">Роль:</label>
             <select id="role" name="role">
                 <option value="user">Пользователь</option>
-                <option value="admin">Админ</option>
+                <option value="admin">Администратор</option>
             </select>
         </div>
 

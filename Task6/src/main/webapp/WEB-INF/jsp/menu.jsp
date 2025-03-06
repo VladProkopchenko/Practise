@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,13 +14,14 @@
         <p>Привет, ${sessionScope.user.name}</p>
         <form action="${pageContext.request.contextPath}/menu" method="post">
             <button type="submit" name="action" value="logout">Выйти</button>
-            <c:if test="${sessionScope.user.role == 'admin'}">
-                <button type="submit" name="action" value="addUser">Добавить пользователя</button>
-            </c:if>
         </form>
     </div>
     <h2>Главная страница</h2>
-
+    <form action="${pageContext.request.contextPath}/menu" method="post">
+        <c:if test="${sessionScope.user.role == 'admin'}">
+            <button type="submit" name="action" value="addUser">Добавить пользователя</button>
+        </c:if>
+    </form>
     <c:if test="${sessionScope.user.role == 'admin'}">
         <div class="table-container">
             <h3>Пользователи</h3>
@@ -28,7 +30,6 @@
                     <th>Имя</th>
                     <th>Фамилия</th>
                     <th>Отчество</th>
-                    <th>Логин</th>
                     <th>Почта</th>
                     <th>Дата рождения</th>
                     <th>Роль</th>
@@ -38,10 +39,18 @@
                         <td>${user.name}</td>
                         <td>${user.surname}</td>
                         <td>${user.patronymic}</td>
-                        <td>${user.login}</td>
                         <td>${user.email}</td>
-                        <td>${user.birthday}</td>
-                        <td>${user.role}</td>
+                        <td>
+                            <fmt:formatDate value="${user.birthday}" pattern="dd.MM.yyyy" />
+                        </td>
+                        <td>
+                            <c:if test="${user.role == 'admin'}">
+                                Администратор
+                            </c:if>
+                            <c:if test="${user.role == 'user'}">
+                                Пользователь
+                            </c:if>
+                        </td>
                         <td>
                             <form action="${pageContext.request.contextPath}/menu" method="post">
                                 <input type="hidden" name="userId" value="${user.id}"/>
