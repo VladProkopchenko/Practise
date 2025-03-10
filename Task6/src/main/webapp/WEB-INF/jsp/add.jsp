@@ -1,14 +1,10 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
-<head>
-    <title>Title</title>
-    <style>
-        <%@include file="/WEB-INF/css/styles.css"%>
-    </style>
-</head>
-<body>
-<div class="center-content">
+<t:head title="Новый пользователь">
+
+</t:head>
+<t:centeredBody>
     <form action="${pageContext.request.contextPath}/new-user" method="post">
         <h1>Новый пользователь</h1>
 
@@ -57,7 +53,7 @@
 
         <button type="submit">Добавить</button>
     </form>
-</div>
-</body>
+</t:centeredBody>
+
 
 </html>

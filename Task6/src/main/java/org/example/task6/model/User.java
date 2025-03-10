@@ -1,5 +1,6 @@
 package org.example.task6.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
@@ -95,6 +96,12 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return id + ", " + name + ", " + surname + ", " + patronymic + ", " + email + ", " + login + ", " + password + ", " + role + ", " + dateFormat.format(birthday);
     }
 
 }

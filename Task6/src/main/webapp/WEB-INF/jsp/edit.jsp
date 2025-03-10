@@ -1,13 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
-<head>
-    <title>Title</title>
-    <style>
-        <%@include file="/WEB-INF/css/styles.css"%>
-    </style>
-</head>
-<body>
-<div class="center-content">
+<t:head title="Изменить пользователя">
+
+</t:head>
+<t:centeredBody>
     <form action="${pageContext.request.contextPath}/edit-user" method="post">
         <h1>Редактировать пользователя</h1>
         <div class="form-group">
@@ -33,7 +30,7 @@
         <div class="form-group">
             <label for="role">Роль:</label>
             <select id="role" name="role" required>
-                <option value="user" >Пользователь</option>
+                <option value="user">Пользователь</option>
                 <option value="admin">Администратор</option>
             </select>
         </div>
@@ -44,7 +41,6 @@
         <button type="submit" name="action" value="save">Сохранить изменения</button>
         <button type="submit" name="action" value="cansel">Отменить изменения</button>
     </form>
-</div>
+</t:centeredBody>
 
-</body>
 </html>

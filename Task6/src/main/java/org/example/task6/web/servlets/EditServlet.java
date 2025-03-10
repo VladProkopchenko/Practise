@@ -1,4 +1,4 @@
-package org.example.task6.servlets;
+package org.example.task6.web.servlets;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -6,7 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.task6.dao.FileUserDAO;
+import org.example.task6.dao.UserDAO;
 import org.example.task6.model.User;
+import org.example.task6.service.UserService;
+import org.example.task6.service.UserServiceImpl;
+import org.example.task6.tools.FileUtil;
 import org.example.task6.tools.Validator;
 
 import java.io.IOException;
@@ -16,6 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 public class EditServlet extends HttpServlet {
+    private FileUtil fileUtil = new FileUtil();
+    private UserDAO userDAO = new FileUserDAO(fileUtil);
+    private UserService userService = new UserServiceImpl((FileUserDAO) userDAO);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/edit.jsp");
@@ -31,7 +39,6 @@ public class EditServlet extends HttpServlet {
             String patronymic = request.getParameter("patronymic");
             String email = request.getParameter("email");
             String login = request.getParameter("login");
-            String password = request.getParameter("password");
             String role = request.getParameter("role");
             String birthdayStr = request.getParameter("birthday");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -52,13 +59,9 @@ public class EditServlet extends HttpServlet {
                 modifiedUser.setLogin(login);
                 modifiedUser.setRole(role);
                 modifiedUser.setBirthday(birthday);
-
-                List<User> users = (List<User>) session.getAttribute("users");
-                for (User user : users) {
-                    if (user.getId() == modifiedUser.getId()) {
-                        user = modifiedUser;
-                    }
-                }
+                userService.updateUser(modifiedUser);
+                List<User> users = userService.getAllUsers();
+                System.out.println(users);
                 session.setAttribute("users", users);
                 response.sendRedirect(request.getContextPath() + "/menu");
             } else {

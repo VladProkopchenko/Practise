@@ -1,4 +1,4 @@
-package org.example.task6.servlets;
+package org.example.task6.web.servlets;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -6,7 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.task6.dao.FileUserDAO;
+import org.example.task6.dao.UserDAO;
 import org.example.task6.model.User;
+import org.example.task6.service.UserService;
+import org.example.task6.service.UserServiceImpl;
+import org.example.task6.tools.FileUtil;
 import org.example.task6.tools.Validator;
 
 import java.io.IOException;
@@ -16,6 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 public class AddServlet extends HttpServlet {
+    private FileUtil fileUtil = new FileUtil();
+    private UserDAO userDAO = new FileUserDAO(fileUtil);
+    private UserService userService = new UserServiceImpl((FileUserDAO) userDAO);
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/add.jsp");
         rd.forward(request, response);
@@ -43,9 +52,10 @@ public class AddServlet extends HttpServlet {
         && Validator.isNotEmpty(email) && Validator.isNotEmpty(login) && Validator.isNotEmpty(password)
             && Validator.isNotEmpty(role) && Validator.isNotEmpty(birthdayStr)){
             HttpSession session = request.getSession();
-            List<User> users = (List<User>) session.getAttribute("users");
+            List<User> users = userService.getAllUsers();
             User user = new User(users.size()+1, name, surname, patronymic, email, login, password, role, birthday);
-            users.add(user);
+            userService.createUser(user);
+            users = userService.getAllUsers();
             session.setAttribute("users", users);
 
             response.sendRedirect(request.getContextPath() + "/menu");

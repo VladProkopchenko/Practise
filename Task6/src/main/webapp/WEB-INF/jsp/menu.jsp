@@ -1,15 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <html>
-<head>
-    <title>Title</title>
-    <style>
-        <%@include file="/WEB-INF/css/styles.css"%>
-    </style>
-</head>
-<body>
-<div class="content-wrapper">
+<t:head title="Меню">
+
+</t:head>
+<t:borderedBody>
     <div class="right-align">
         <p>Привет, ${sessionScope.user.name}</p>
         <form action="${pageContext.request.contextPath}/menu" method="post">
@@ -63,7 +60,5 @@
             </table>
         </div>
     </c:if>
-</div>
-</body>
-
+</t:borderedBody>
 </html>

@@ -1,4 +1,4 @@
-package org.example.task6.servlets;
+package org.example.task6.web.servlets;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

@@ -1,14 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
-<head>
-    <title>Вход</title>
-    <style>
-        <%@include file="/WEB-INF/css/styles.css"%>
-    </style>
-</head>
-<body>
-<div class="center-content">
+<t:head title="Вход">
 
+</t:head>
+<t:centeredBody>
     <form action="${pageContext.request.contextPath}/login" method="post">
         <h1>Вход</h1>
         <div class="form-group">
@@ -21,8 +17,5 @@
         </div>
         <button type="submit">Войти</button>
     </form>
-</div>
-
-
-</body>
+</t:centeredBody>
 </html>

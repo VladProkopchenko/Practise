@@ -1,4 +1,4 @@
-package org.example.task6.filters;
+package org.example.task6.web.filters;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

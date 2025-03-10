@@ -5,7 +5,7 @@
          version="6.0">
     <servlet>
         <servlet-name>StartServlet</servlet-name>
-        <servlet-class>org.example.task6.servlets.StartServlet</servlet-class>
+        <servlet-class>org.example.task6.web.servlets.StartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StartServlet</servlet-name>
@@ -13,7 +13,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>org.example.task6.servlets.LoginServlet</servlet-class>
+        <servlet-class>org.example.task6.web.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -21,7 +21,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>MenuServlet</servlet-name>
-        <servlet-class>org.example.task6.servlets.MenuServlet</servlet-class>
+        <servlet-class>org.example.task6.web.servlets.MenuServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MenuServlet</servlet-name>
@@ -29,7 +29,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddServlet</servlet-name>
-        <servlet-class>org.example.task6.servlets.AddServlet</servlet-class>
+        <servlet-class>org.example.task6.web.servlets.AddServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>
@@ -37,7 +37,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>EditServlet</servlet-name>
-        <servlet-class>org.example.task6.servlets.EditServlet</servlet-class>
+        <servlet-class>org.example.task6.web.servlets.EditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditServlet</servlet-name>
@@ -47,7 +47,7 @@
 
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>org.example.task6.filters.LoginFilter</filter-class>
+        <filter-class>org.example.task6.web.filters.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
