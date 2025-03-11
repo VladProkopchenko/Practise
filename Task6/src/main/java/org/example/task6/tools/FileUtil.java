@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FileUtil {
 
-    public void writeUsersToFile(String fileName, List<User> users) {
+    public static void  writeUsersToFile(String fileName, List<User> users) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (User user : users) {
                 writer.write(user.toString());
@@ -22,7 +22,7 @@ public class FileUtil {
             e.printStackTrace();
         }
     }
-    public List<User> readUsersFromFile(String fileName) {
+    public static List<User> readUsersFromFile(String fileName) {
         System.out.println("FileUtil.readUsersFromFile: " + fileName);
         List<User> users = new ArrayList<>();
 

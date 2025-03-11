@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.task6.dao.FileUserDAO;
 import org.example.task6.dao.UserDAO;
+import org.example.task6.dao.UserDAOFactory;
 import org.example.task6.model.User;
 import org.example.task6.service.UserService;
+import org.example.task6.service.UserServiceFactory;
 import org.example.task6.service.UserServiceImpl;
 import org.example.task6.tools.FileUtil;
 import org.example.task6.tools.Validator;
@@ -21,9 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 public class AddServlet extends HttpServlet {
-    private FileUtil fileUtil = new FileUtil();
-    private UserDAO userDAO = FileUserDAO.getInstance(fileUtil);
-    private UserService userService = UserServiceImpl.getInstance(userDAO);
+    private UserDAO userDAO = UserDAOFactory.getUserDAO("file");
+    private UserService userService = UserServiceFactory.getUserService("user",userDAO);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/add.jsp");
