@@ -18,8 +18,8 @@ import java.util.List;
 
 public class LoginServlet extends HttpServlet {
     private FileUtil fileUtil = new FileUtil();
-    private UserDAO userDAO = new FileUserDAO(fileUtil);
-    private UserService userService = new UserServiceImpl((FileUserDAO) userDAO);
+    private UserDAO userDAO = FileUserDAO.getInstance(fileUtil);
+    private UserService userService = UserServiceImpl.getInstance(userDAO);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");

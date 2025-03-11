@@ -7,24 +7,37 @@ import org.example.task6.tools.Validator;
 
 import java.util.List;
 
-public class UserServiceImpl implements UserService{
-    private UserDAO userDAO;
-    public UserServiceImpl(FileUserDAO userDAO) {
+public class UserServiceImpl implements UserService {
+    private static UserServiceImpl userServiceImpl;
+    private final UserDAO userDAO;
+
+    private UserServiceImpl(UserDAO userDAO) {
         this.userDAO = userDAO;
+    }
+
+    public static UserServiceImpl getInstance(UserDAO userDAO) {
+        if (userServiceImpl == null) {
+            userServiceImpl = new UserServiceImpl(userDAO);
+        }
+        return userServiceImpl;
     }
 
     public void createUser(User user) {
         userDAO.createUser(user);
     }
+
     public User getUserById(int id) {
         return userDAO.read(id);
     }
+
     public List<User> getAllUsers() {
         return userDAO.findAll();
     }
+
     public void deleteUser(int id) {
         userDAO.deleteById(id);
     }
+
     public User getUserByLogin(String login) {
         return userDAO.findByLogin(login);
     }

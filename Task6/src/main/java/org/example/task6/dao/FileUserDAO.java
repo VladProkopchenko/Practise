@@ -6,11 +6,18 @@ import org.example.task6.tools.FileUtil;
 import java.util.List;
 
 public class FileUserDAO implements UserDAO {
-    private FileUtil fileUtil;
+    private static FileUserDAO fileUserDAO;
+    private final FileUtil fileUtil;
     private final String fileDirectory = "C:\\Users\\Admin\\Desktop\\Practise\\Task6\\src\\main\\java\\org\\example\\task6\\users.txt";
 
-    public FileUserDAO(FileUtil fileUtil) {
+    private FileUserDAO(FileUtil fileUtil) {
         this.fileUtil = fileUtil;
+    }
+    public static FileUserDAO getInstance(FileUtil fileUtil) {
+        if (fileUserDAO == null) {
+            fileUserDAO = new FileUserDAO(fileUtil);
+        }
+        return fileUserDAO;
     }
     @Override
     public void createUser(User user) {
