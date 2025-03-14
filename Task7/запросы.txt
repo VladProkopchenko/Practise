@@ -1,0 +1,145 @@
+1. 
+CREATE SCHEMA authorization_ AUTHORIZATION postgres;
+
+create table authorization_.users(
+	id serial primary key,
+	login varchar(30) not null unique,
+	password varchar(30) not null,
+	name varchar(30) not null,
+	birth_date date
+);
+
+create table authorization_.roles(
+	id serial primary key,
+	name varchar(30) not null unique
+);
+
+2.
+
+alter table authorization_.users	
+add column age int not null check (age > 18),
+add column salary numeric;
+
+create index user_name_index on authorization_.users (name);
+
+alter table authorization_.users
+add column role_id int,
+add constraint fk_role foreign key (role_id) references authorization_.roles (id);
+
+3.
+
+insert into authorization_.roles (name) values
+('Администратор'), ('Менеджер'), ('Бухгалтер'), ('Охранник'), ('Тестировщик');
+
+insert into authorization_.users (login, password, name, birth_date, age, salary, role_id) values
+('vladimir', 'pass1', 'Владимир', '1985-02-15', 40, 1500, 1),
+('anna', 'pass2', 'Анна', '1992-06-25', 32, 2500, 2),
+('ivan', 'pass3', 'Иван', NULL, 28, NULL, 3),
+('petr', 'pass4', 'Петр', '1999-03-10', 25, 1800, 3),
+('olga', 'pass5', 'Ольга', NULL, 30, 2000, 4),
+('sergey', 'pass6', 'Сергей', '2000-08-05', 23, NULL, 5),
+('tatyana', 'pass7', 'Татьяна', '1994-09-15', 29, 1700, 2),
+('andrey', 'pass8', 'Андрей', NULL, 35, NULL, 1),
+('katerina', 'pass9', 'Катерина', '1980-01-20', 45, 3000, 2),
+('nikolay', 'pass10', 'Николай', NULL, 22, 1200, 3),
+('dmitry', 'pass11', 'Дмитрий', '1995-12-15', 28, 1900, 4),
+('elena', 'pass12', 'Елена', '1988-07-11', 37, 2400, 4),
+('alexey', 'pass13', 'Алексей', NULL, 31, 2600, 2),
+('marina', 'pass14', 'Марина', '1989-10-01', 35, 2300, 5),
+('victor', 'pass15', 'Виктор', NULL, 38, 2700, 1);
+
+4.
+
+select * from authorization_.users
+
+select * from authorization_.users
+where birth_date is not null
+
+select * from authorization_.users
+where birth_date between '1990-01-01' and '2000-09-01'
+
+select age, count(*) as users_count from authorization_.users
+group by age
+
+select age, count(*) as users_count from authorization_.users
+group by age
+having count(*)>1
+order by users_count
+desc
+
+select u.name, r.name
+from authorization_.users as u
+join authorization_.roles r on u.role_id = r.id
+
+select u.name, r.name
+from authorization_.users as u
+join authorization_.roles r on u.role_id = r.id
+limit 5 offset 2
+
+5.
+
+update authorization_.users
+set salary = 0
+where salary is null;
+
+alter table authorization_.users
+alter column salary set not null,
+alter column salary set default 1000
+
+select avg(salary) from authorization_.users
+where age < 25
+union
+select avg(salary) from authorization_.users
+where age > 25
+
+6.
+
+update authorization_.users
+set salary = salary*1.2
+where salary < 3000
+
+update authorization_.users
+set role_id = (select id from authorization_.roles where name ='Менеджер' limit 1)
+where name like 'С%'
+
+7.
+
+create table authorization_.user_roles(
+	user_id int not null,
+	role_id int not null,
+	primary key(user_id, role_id),
+	foreign key (user_id) references authorization_.users (id),
+	foreign key (role_id) references authorization_.roles (id)
+);
+insert into authorization_.user_roles (user_id, role_id)
+select id as user_id, role_id from authorization_.users where role_id is not null;
+
+alter table authorization_.users drop column role_id
+
+8.
+
+insert into authorization_.user_roles (user_id, role_id)
+select user_id, role_id from (
+    select u.id as user_id, r.id as role_id
+    from authorization_.users u
+    cross join authorization_.roles r
+    where u.id = 1 
+      and r.id not in (select role_id from authorization_.user_roles where user_id = u.id)
+    LIMIT 3
+) as new_roles;
+
+select u.name as user_name, r.name
+from authorization_.users u
+join authorization_.user_roles ur on u.id = ur.user_id
+join authorization_.roles r on ur.role_id = r.id;
+
+select u.name as user_name, r.name
+from authorization_.users u
+join authorization_.user_roles ur on u.id = ur.user_id
+join authorization_.roles r on ur.role_id = r.id;
+
+select u.name as user_name, r.name
+from authorization_.users u
+join authorization_.user_roles ur on u.id = ur.user_id
+join authorization_.roles r on ur.role_id = r.id
+where ur.user_id is null or ur.role_id is null
